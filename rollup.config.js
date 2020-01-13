@@ -1,7 +1,13 @@
+import babel from 'rollup-plugin-babel'
+import resolve from '@rollup/plugin-node-resolve'
+import { terser } from 'rollup-plugin-terser'
+
 const dist = 'dist'
+const production = !process.env.ROLLUP_WATCH
 
 export default {
   input: 'src/index.js',
+  external: ['react'],
   output: [
     {
       file: `${dist}/bundle-cjs.js`,
@@ -9,7 +15,11 @@ export default {
     },
     {
       file: `${dist}/bundle-iife.js`,
-      format: 'iife'
+      format: 'iife',
+      globals: {
+        react: 'React',
+        'react-dom': 'ReactDOM'
+      }
     },
     {
       file: `${dist}/bundle-esm.js`,
@@ -20,5 +30,12 @@ export default {
       file: `${dist}/bundle-umd.js`,
       format: 'umd'
     }
+  ],
+  plugin: [
+    resolve(),
+    babel({
+      exclude: 'node_modules/**'
+    }),
+    production && terser()
   ]
 }
