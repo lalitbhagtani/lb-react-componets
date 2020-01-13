@@ -10,7 +10,11 @@
     "type": "git",
     "url": "git+https://github.com/lalitbhagtani/lb-react-componets.git"
   },
-  "keywords": ["react", "css", "components"],
+  "keywords": [
+    "react",
+    "css",
+    "components"
+  ],
   "author": "Lalit Bhagtani",
   "license": "MIT",
   "bugs": {
